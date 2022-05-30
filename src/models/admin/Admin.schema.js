@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const AdminSchema = new mongoose.Schema(
   {
@@ -20,7 +20,7 @@ const AdminSchema = new mongoose.Schema(
     },
 
     dob: {
-      type: date,
+      type: Date,
       default: null,
     },
     email: {
@@ -28,7 +28,7 @@ const AdminSchema = new mongoose.Schema(
       required: true,
       trim: true,
       maxlength: [50, "Email must be less than 50 character"],
-      index: 1,
+      indexes: 1,
       unique: true,
     },
     phone: {

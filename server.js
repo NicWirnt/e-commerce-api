@@ -31,8 +31,9 @@ app.get("/", (req, res) => {
 });
 
 // ERROR Handling
-app.use((err, req, res, next) => {
-  console.log(err);
+app.use((error, req, res, next) => {
+  res.status(error.status || 400);
+
   res.json({
     status: "error",
     message: error.message,

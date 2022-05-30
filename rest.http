@@ -15,6 +15,7 @@ Content-Type: application/json
     "email" : "admin@admin.com",
     "phone" : "1234567890",
     "address" : "SYDNEY",
+    "dob" : "2020-02-20",
     "password" : "admin"
 }
 
