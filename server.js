@@ -20,6 +20,10 @@ import { dbConnect } from "./src/config/dbConfig.js";
 dbConnect();
 
 // ROUTERS SECTION
+import adminRouter from "./src/routers/adminRouter.js";
+
+app.use("/api/v1/admin", adminRouter);
+
 app.get("/", (req, res) => {
   res.json({
     message: "You have reached the admin API",
