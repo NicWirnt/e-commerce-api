@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 const AdminSchema = new mongoose.Schema(
   {
     status: {
-      type: Boolean,
-      default: false,
+      type: String,
+      default: "inactive",
     },
     fName: {
       type: String,
@@ -30,6 +30,10 @@ const AdminSchema = new mongoose.Schema(
       maxlength: [50, "Email must be less than 50 character"],
       indexes: 1,
       unique: true,
+    },
+    emailValidationCode: {
+      type: String,
+      default: "",
     },
     phone: {
       type: String,

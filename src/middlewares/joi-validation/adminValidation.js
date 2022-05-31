@@ -22,6 +22,23 @@ export const newAdminValidation = (req, res, next) => {
   next();
 };
 
+export const emailVerificationValidation = (req, res, next) => {
+  const schema = Joi.object({
+    email: Joi.string().email({ minDomainSegments: 2 }).required(),
+    emailValidationCode: Joi.string().required(),
+  });
+
+  const { error } = schema.validate(req.body);
+  if (error) {
+    return res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
+
+  next();
+};
+
 // "phone" : 1234567890,
 // "address" : "SYDNEY",
 // "password" : "admin"
