@@ -1,10 +1,15 @@
 import express from "express";
-import { encryptPassword } from "../../helpers/bcrypthelper.js";
+import { encryptPassword, verifyPassword } from "../../helpers/bcrypthelper.js";
 import {
   emailVerificationValidation,
+  loginValidation,
   newAdminValidation,
 } from "../middlewares/joi-validation/adminValidation.js";
-import { insertAdmin, updateAdmin } from "../models/admin/Admin.model.js";
+import {
+  getAdmin,
+  insertAdmin,
+  updateAdmin,
+} from "../models/admin/Admin.model.js";
 import { v4 as uuidv4 } from "uuid";
 import { sendMail } from "../../helpers/emailHelper.js";
 
@@ -24,6 +29,7 @@ router.get("/", (req, res) => {
   }
 });
 
+// new Admin Registration
 router.post("/", newAdminValidation, async (req, res, next) => {
   try {
     const hashPassword = encryptPassword(req.body.password);
@@ -46,7 +52,7 @@ router.post("/", newAdminValidation, async (req, res, next) => {
 
       res.json({
         status: "success",
-        message: "POST hit to admin Router",
+        message: "Admin successfull created",
       });
     } else {
       res.json({
@@ -66,7 +72,6 @@ router.post("/", newAdminValidation, async (req, res, next) => {
 });
 
 // email verification router
-
 router.post(
   "/email-verification",
   emailVerificationValidation,
@@ -75,31 +80,53 @@ router.post(
     const filter = req.body;
     const update = { status: "active" };
     const result = await updateAdmin(filter, update);
-    console.log(result);
 
-    result?._id
-      ? res.json({
-          status: "success",
-          message: "email successfully verified. You may login now",
-        })
-      : res.json({
-          status: "error",
-          message: "Invalid or expired verification link",
-        });
+    if (result?._id) {
+      res.json({
+        status: "success",
+        message: "Your email has been verified. You may login now",
+      });
+
+      await updateAdmin(filter, { emailValidationCode: "" });
+      // send email to user
+      return;
+    }
+    res.json({
+      status: "error",
+      message: "Invalid or expired verification link",
+    });
   }
 );
 
-router.patch("/", (req, res) => {
+// Admin login with email and password
+// this feature is not completed yet
+router.post("/login", loginValidation, async (req, res, next) => {
+  //check for the authentication
   try {
-    res.json({
-      status: "success",
-      message: "PATCH hit to admin Router",
+    const { email, password } = req.body;
+
+    const user = await getAdmin({ email });
+
+    if (user?._id) {
+      const isMatched = verifyPassword(password, user.password);
+
+      console.log(isMatched);
+      user.password = undefined;
+      //when undefined, api wont send the undefined value
+      res.json({
+        status: "success",
+        message: "User Logged in successfully",
+        user,
+      });
+      return;
+    }
+    res.status(401).json({
+      status: "error",
+      message: "Invalid login credentails",
     });
   } catch (error) {
-    res.json({
-      status: "error",
-      message: error.message,
-    });
+    error.status = 500;
+    next(error);
   }
 });
 

@@ -12,7 +12,7 @@ Content-Type: application/json
 {
     "fName" : "admin",
     "lName" : "admin",
-    "email" : "c@admin.com",
+    "email" : "a@admin.com",
     "phone" : "1234567890",
     "address" : "SYDNEY",
     "dob" : "2020-02-20",
@@ -24,9 +24,15 @@ POST  http://localhost:8000/api/v1/admin/email-verification
 Content-Type: application/json
 
 {
-    "email" : "c@admin.com",
-   "emailValidationCode" : "82753135-c105-4362-a844-8d22f47a0a11"
+    "email" : "a@admin.com",
+   "emailValidationCode" : "95244771-cf94-4893-836d-29070b554d71"
 }
 
-### GET ADMIN API
-PATCH http://localhost:8000/api/v1/admin
+### LOGIN API
+POST http://localhost:8000/api/v1/admin/login
+Content-Type: application/json
+
+{
+    "email" : "sam@email.com",
+    "password" : "123456"
+}

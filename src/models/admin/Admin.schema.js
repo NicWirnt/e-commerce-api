@@ -24,12 +24,12 @@ const AdminSchema = new mongoose.Schema(
       default: null,
     },
     email: {
+      unique: true,
+      index: 1,
       type: String,
       required: true,
       trim: true,
       maxlength: [50, "Email must be less than 50 character"],
-      indexes: 1,
-      unique: true,
     },
     emailValidationCode: {
       type: String,
