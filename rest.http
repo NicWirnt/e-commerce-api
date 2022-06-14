@@ -12,7 +12,7 @@ Content-Type: application/json
 {
     "fName" : "admin",
     "lName" : "admin",
-    "email" : "a@admin.com",
+    "email" : "a@a.com",
     "phone" : "1234567890",
     "address" : "SYDNEY",
     "dob" : "2020-02-20",
@@ -35,4 +35,25 @@ Content-Type: application/json
 {
     "email" : "sam@email.com",
     "password" : "123456"
+}
+
+### Create new Category
+POST http://localhost:8000/api/v1/category/
+Content-Type: application/json
+
+{
+    "parentCatId" : "62a7d6073670ec8f0bc85fa9",
+    "catName" : "Water gun"
+}
+
+###get all active categories
+GET  http://localhost:8000/api/v1/category/
+
+### Update status of a categories
+PATCH http://localhost:8000/api/v1/category/
+Content-Type: application/json
+
+{
+    "_id" : "62a7d6073670ec8f0bc85fa9",
+    "status" : "active"
 }

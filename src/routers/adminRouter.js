@@ -76,9 +76,8 @@ router.post(
   "/email-verification",
   emailVerificationValidation,
   async (req, res) => {
-    console.log(req.body);
     const filter = req.body;
-    const update = { status: "active" };
+    const update = { status: "active", emailValidationCode: "" };
     const result = await updateAdmin(filter, update);
 
     if (result?._id) {
@@ -87,7 +86,7 @@ router.post(
         message: "Your email has been verified. You may login now",
       });
 
-      await updateAdmin(filter, { emailValidationCode: "" });
+      // await updateAdmin(filter, { emailValidationCode: "" });
       // send email to user
       return;
     }
@@ -108,17 +107,26 @@ router.post("/login", loginValidation, async (req, res, next) => {
     const user = await getAdmin({ email });
 
     if (user?._id) {
+      if (user.status === "inactive") {
+        return res.json({
+          status: "error",
+          message:
+            "Your email haven't been activated yet. Please check your email and follow the instruction to activate your account",
+        });
+      }
+
       const isMatched = verifyPassword(password, user.password);
 
-      console.log(isMatched);
-      user.password = undefined;
       //when undefined, api wont send the undefined value
-      res.json({
-        status: "success",
-        message: "User Logged in successfully",
-        user,
-      });
-      return;
+      if (isMatched) {
+        user.password = undefined;
+        res.json({
+          status: "success",
+          message: "User Logged in successfully",
+          user,
+        });
+        return;
+      }
     }
     res.status(401).json({
       status: "error",
