@@ -1,7 +1,10 @@
 import express from "express";
 import { newCategoryValidation } from "../middlewares/joi-validation/productCategoryValidation.js";
 import {
+  deleteCatById,
+  getAllCategories,
   getCategories,
+  getCategory,
   insertCategory,
   updateCategoryById,
 } from "../models/category/Category.models.js";
@@ -42,7 +45,7 @@ router.post("/", newCategoryValidation, async (req, res, next) => {
 router.get("/", async (req, res, next) => {
   try {
     const filter = { status: "active" };
-    const result = await getCategories(filter);
+    const result = await getAllCategories(filter);
 
     res.json({
       status: "success",
@@ -80,4 +83,34 @@ router.patch("/", async (req, res, next) => {
   }
 });
 
+router.delete("/", async (req, res, next) => {
+  try {
+    const { _id } = req.body;
+    const filter = { parentCatId: _id };
+
+    const childCats = await getCategories(filter);
+
+    if (childCats.length) {
+      res.json({
+        status: "error",
+        message:
+          "There is a dependent category to this parent Category, please relocate child category to another category and proceed to delete this category",
+      });
+      return;
+    } else {
+      const result = await deleteCatById(_id);
+      result?._id
+        ? res.json({
+            status: "success",
+            message: "Category successfully deleted",
+          })
+        : res.json({
+            status: "error",
+            message: "Unable to delete, please try again later",
+          });
+    }
+  } catch (error) {
+    next(error);
+  }
+});
 export default router;

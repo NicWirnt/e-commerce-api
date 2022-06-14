@@ -42,8 +42,9 @@ POST http://localhost:8000/api/v1/category/
 Content-Type: application/json
 
 {
-    "parentCatId" : "62a7d6073670ec8f0bc85fa9",
-    "catName" : "Water gun"
+    "status" : "inactive",
+    
+    "catName" : "Gun"
 }
 
 ###get all active categories
@@ -56,4 +57,13 @@ Content-Type: application/json
 {
     "_id" : "62a7d6073670ec8f0bc85fa9",
     "status" : "active"
+}
+
+### delete category
+
+DELETE http://localhost:8000/api/v1/category/
+Content-Type: application/json
+
+{
+    "_id" : "62a81861fe9d53b51e58fee9"
 }
