@@ -1,17 +1,27 @@
 import express from "express";
 import slugify from "slugify";
 import { newProductValidation } from "../middlewares/joi-validation/productCategoryValidation.js";
-import { insertProduct } from "../models/product/Product.model.js";
+import {
+  deleteProduct,
+  getAllProducts,
+  insertProduct,
+} from "../models/product/Product.model.js";
 
 const router = express.Router();
 
-router.get("/", (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
-    console.log(req.body);
-    res.json({
-      status: "success",
-      message: "Product get router hit",
-    });
+    const result = await getAllProducts();
+    result?.length
+      ? res.json({
+          status: "success",
+          message: "Product get router hit",
+          result,
+        })
+      : res.json({
+          status: "error",
+          message: "Failed fetching all products, please try again later",
+        });
   } catch (error) {
     next(error);
   }
@@ -44,6 +54,24 @@ router.post("/", newProductValidation, async (req, res, next) => {
   }
 });
 
+router.delete("/", async (req, res, next) => {
+  try {
+    const result = await deleteProduct(req.body);
+    result?._id
+      ? res.json({
+          status: "success",
+          message: "Product deleted successfully",
+        })
+      : res.json({
+          status: "error",
+          message: "Error deleting product, please try again later",
+        });
+  } catch (error) {
+    next(error);
+  }
+});
+export default router;
+
 router.patch("/", (req, res, next) => {
   try {
     res.json({
@@ -54,15 +82,3 @@ router.patch("/", (req, res, next) => {
     next(error);
   }
 });
-
-router.delete("/", (req, res, next) => {
-  try {
-    res.json({
-      status: "success",
-      message: "Product delete router hit",
-    });
-  } catch (error) {
-    next(error);
-  }
-});
-export default router;

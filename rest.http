@@ -81,11 +81,11 @@ POST http://localhost:8000/api/v1/products/
 Content-Type: application/json
 
 {
-    "name" : "Fire Truck 02",
-    "sku": "Trk-02",
-    "description":"Small fire truck with remote control",
-    "qty": 10,
-    "price": 50,
+    "name" : "Ferrari",
+    "sku": "Frr-01",
+    "description":"Ferrari toy RC",
+    "qty": 15,
+    "price": 100,
     "salesPrice": 0,
     "salesDate":null
 }

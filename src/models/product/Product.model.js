@@ -7,6 +7,10 @@ export const getProduct = (filter) => {
   return ProductSchema.findOne(filter);
 };
 
+export const getAllProducts = () => {
+  return ProductSchema.find();
+};
+
 export const getMultipleProducts = (filter) => {
   return ProductSchema.find(filter);
 };
