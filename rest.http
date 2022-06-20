@@ -37,6 +37,8 @@ Content-Type: application/json
     "password" : "123456"
 }
 
+###### CATEGORY API #######
+
 ### Create new Category
 POST http://localhost:8000/api/v1/category/
 Content-Type: application/json
@@ -66,4 +68,24 @@ Content-Type: application/json
 
 {
     "_id" : "62a81861fe9d53b51e58fee9"
+}
+
+
+##### Product API ######
+
+### GET PRODUCT
+GET http://localhost:8000/api/v1/products/
+
+### POST PRODUCT
+POST http://localhost:8000/api/v1/products/
+Content-Type: application/json
+
+{
+    "name" : "Fire Truck 02",
+    "sku": "Trk-02",
+    "description":"Small fire truck with remote control",
+    "qty": 10,
+    "price": 50,
+    "salesPrice": 0,
+    "salesDate":null
 }
