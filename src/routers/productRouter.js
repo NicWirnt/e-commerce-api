@@ -1,27 +1,34 @@
 import express from "express";
 import slugify from "slugify";
-import { newProductValidation } from "../middlewares/joi-validation/productCategoryValidation.js";
 import {
+  newProductValidation,
+  updateProductValidation,
+} from "../middlewares/joi-validation/productCategoryValidation.js";
+import {
+  deleteMultiProducts,
   deleteProduct,
   getAllProducts,
+  getMultipleProducts,
+  getProduct,
   insertProduct,
+  updateProductById,
 } from "../models/product/Product.model.js";
 
 const router = express.Router();
 
-router.get("/", async (req, res, next) => {
+router.get("/:_id?", async (req, res, next) => {
   try {
-    const result = await getAllProducts();
-    result?.length
-      ? res.json({
-          status: "success",
-          message: "Product get router hit",
-          result,
-        })
-      : res.json({
-          status: "error",
-          message: "Failed fetching all products, please try again later",
-        });
+    const { _id } = req.params;
+
+    const result = _id
+      ? await getProduct({ _id })
+      : await getMultipleProducts();
+
+    res.json({
+      status: "success",
+      message: "Product List",
+      result,
+    });
   } catch (error) {
     next(error);
   }
@@ -56,29 +63,43 @@ router.post("/", newProductValidation, async (req, res, next) => {
 
 router.delete("/", async (req, res, next) => {
   try {
-    const result = await deleteProduct(req.body);
-    result?._id
-      ? res.json({
+    const ids = req.body;
+    if (ids.length) {
+      const result = await deleteMultiProducts(req.body);
+      if (result?.deletedCount) {
+        return res.json({
           status: "success",
-          message: "Product deleted successfully",
-        })
-      : res.json({
-          status: "error",
-          message: "Error deleting product, please try again later",
+          message: "Selected products deleted successfully",
         });
-  } catch (error) {
-    next(error);
-  }
-});
-export default router;
+      }
+    }
 
-router.patch("/", (req, res, next) => {
-  try {
     res.json({
-      status: "success",
-      message: "Product patch router hit",
+      status: "error",
+      message: "Error deleting product, please try again later",
     });
   } catch (error) {
     next(error);
   }
 });
+
+router.put("/", updateProductValidation, async (req, res, next) => {
+  try {
+    const { _id, ...rest } = req.body;
+    const result = await updateProductById({ _id }, rest);
+
+    result?._id
+      ? res.json({
+          status: "success",
+          message: "Product has been updated",
+        })
+      : res.json({
+          status: "error",
+          message: "Unable to update the product, please try again later",
+        });
+  } catch (error) {
+    next(error);
+  }
+});
+
+export default router;

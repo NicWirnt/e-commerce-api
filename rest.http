@@ -76,16 +76,36 @@ Content-Type: application/json
 ### GET PRODUCT
 GET http://localhost:8000/api/v1/products/
 
+
+### GET PRODUCT BY ID
+GET http://localhost:8000/api/v1/products/62ba32c79fc0bd53e4d5689a
+
+
 ### POST PRODUCT
 POST http://localhost:8000/api/v1/products/
 Content-Type: application/json
 
 {
+    "catId" : "62afe12354019216219ff504",
+    "status" : "inactive",
     "name" : "Ferrari",
     "sku": "Frr-01",
     "description":"Ferrari toy RC",
     "qty": 15,
     "price": 100,
-    "salesPrice": 0,
-    "salesDate":null
+    "salesPrice": 0
+}
+
+### Update
+Put http://localhost:8000/api/v1/products/
+Content-Type: application/json
+
+{   "_id" : "62ba32c79fc0bd53e4d5689a",
+    "catId" : "62afe12354019216219ff504",
+    "status" : "inactive",
+    "name" : "Ferrari",
+    "description":"Ferrari toy RC",
+    "qty": 15,
+    "price": 100,
+    "salesPrice": 0
 }
