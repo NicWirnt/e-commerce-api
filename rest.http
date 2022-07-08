@@ -109,3 +109,33 @@ Content-Type: application/json
     "price": 100,
     "salesPrice": 0
 }
+
+
+##### Payment METHODS API #####
+### Get all payment methods
+GET  http://localhost:8000/api/v1/payment-method/
+
+### POST all payment methods
+POST  http://localhost:8000/api/v1/payment-method/
+Content-Type: application/json
+
+{
+    "status" : "inactive",
+    "name" : "Netpay",
+    "description" : "Please pay into following bank account"
+}
+
+### Update payment method
+PUT  http://localhost:8000/api/v1/payment-method/
+Content-Type: application/json
+
+{
+    "_id" : "62c7f65fc05355e163c6aaef",
+    "status" : "inactive",
+    "name" : "Netpay",
+    "description" : "Please pay into following bank account"
+}
+
+### Delete a payment method
+DELETE  http://localhost:8000/api/v1/payment-method/62ba81f340c06bf9fc688826
+

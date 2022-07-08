@@ -57,7 +57,7 @@ const ProductSchema = new mongoose.Schema(
       required: true,
       default: 0,
     },
-    salesprice: {
+    salesPrice: {
       type: Number,
       default: 0,
     },
