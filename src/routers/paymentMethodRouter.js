@@ -14,7 +14,7 @@ router.get("/:_id?", async (req, res, next) => {
     const { _id } = req.params;
 
     const result = _id
-      ? await getPaymentMethods(_id)
+      ? await getPaymentMethods({ _id })
       : await getAllPaymentMethods();
     console.log(result);
     result?.length

@@ -9,7 +9,7 @@ export const getAllPaymentMethods = () => {
 };
 
 export const getPaymentMethods = (filter) => {
-  return PaymentMethodSchema.find(filter);
+  return PaymentMethodSchema.findById(filter);
 };
 
 export const deletePaymentMethodById = (_id) => {
