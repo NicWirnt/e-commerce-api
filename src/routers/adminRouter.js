@@ -4,6 +4,7 @@ import {
   emailVerificationValidation,
   loginValidation,
   newAdminValidation,
+  updateAdminValidation,
 } from "../middlewares/joi-validation/adminValidation.js";
 import {
   getAdmin,
@@ -134,6 +135,39 @@ router.post("/login", loginValidation, async (req, res, next) => {
     });
   } catch (error) {
     error.status = 500;
+    next(error);
+  }
+});
+
+// update admin profile
+router.put("/", updateAdminValidation, async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await getAdmin({ email });
+
+    if (user?._id) {
+      const isMatched = verifyPassword(password, user.password);
+
+      if (isMatched) {
+        //update user
+        const { _id, ...rest } = req.body;
+        const updatedAdmin = await updateAdmin({ _id }, rest);
+        if (updatedAdmin?._id) {
+          //send email notification saying profile is update
+          return res.json({
+            status: "success",
+            message: "Your profile has been updated successfully",
+            user: updatedAdmin,
+          });
+        }
+      }
+    }
+    res.json({
+      status: "error",
+      message: "Invalid request, your profile did not get updated",
+    });
+  } catch (error) {
     next(error);
   }
 });

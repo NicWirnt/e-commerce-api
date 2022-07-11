@@ -10,10 +10,26 @@ import {
   PHONE,
   REQUIREDSTR,
   validator,
+  SHORTSTR,
 } from "./constantValidation.js";
 
 export const newAdminValidation = (req, res, next) => {
   const schema = Joi.object({
+    fName: FNAME,
+    lName: LNAME,
+    email: EMAIL,
+    phone: PHONE,
+    dob: DOB,
+    address: ADDRESS,
+    password: PASSWORD,
+  });
+
+  validator(schema, req, res, next);
+};
+
+export const updateAdminValidation = (req, res, next) => {
+  const schema = Joi.object({
+    _id: SHORTSTR,
     fName: FNAME,
     lName: LNAME,
     email: EMAIL,
