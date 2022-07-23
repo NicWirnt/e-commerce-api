@@ -237,7 +237,7 @@ router.patch("/password", async (req, res, next) => {
         password: encryptPassword(password),
       };
 
-      const updatedUser = await updateAdmin({ email }, password);
+      const updatedUser = await updateAdmin({ email }, update);
 
       if (updatedUser?._id) {
         // send the email notification{

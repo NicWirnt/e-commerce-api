@@ -6,7 +6,7 @@ const app = express();
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
-
+import path from "path";
 const PORT = process.env.PORT || 8000;
 
 // use middleware
@@ -14,6 +14,10 @@ app.use(express.json()); // used for express, req res
 app.use(cors()); // used for import the environment of the application
 app.use(helmet()); // by default help prevent attack by 60%-70%
 app.use(morgan("dev"));
+
+//server static content
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "public")));
 
 // mongoDb connect
 import { dbConnect } from "./src/config/dbConfig.js";

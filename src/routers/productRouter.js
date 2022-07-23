@@ -14,6 +14,25 @@ import {
   updateProductById,
 } from "../models/product/Product.model.js";
 
+//Multer setup for File upload for validation and upload destination
+import multer from "multer";
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    console.log(file);
+    let error = null;
+    // validation test
+
+    cb(error, "public/img/products");
+  },
+  filename: (req, file, cb) => {
+    const fullFileName = Date.now() + "-" + file.originalname;
+
+    cb(null, fullFileName);
+  },
+});
+
+const upload = multer({ storage });
+
 const router = express.Router();
 
 router.get("/:_id?", async (req, res, next) => {
@@ -34,32 +53,46 @@ router.get("/:_id?", async (req, res, next) => {
   }
 });
 
-router.post("/", newProductValidation, async (req, res, next) => {
-  try {
-    console.log(req.body);
-    const { name } = req.body;
-    const slug = slugify(name, { trim: true, lower: true });
-    req.body.slug = slug;
-    const result = await insertProduct(req.body);
-    result?._id
-      ? res.json({
-          status: "success",
-          message: "New product has been created",
-        })
-      : res.json({
-          status: "error",
-          message: "Error creating new product, please try again later",
-        });
-  } catch (error) {
-    // duplicate slug and the SKU
-    if (error.message.includes("E11000 duplicate key")) {
-      error.status = 200;
-      error.message =
-        "Another product with similar either Name or SKU already exist";
+router.post(
+  "/",
+  upload.array("images", 5),
+  newProductValidation,
+  async (req, res, next) => {
+    try {
+      const files = req.files;
+
+      const images = files.map((img) => img.path);
+
+      const { name } = req.body;
+      const slug = slugify(name, { trim: true, lower: true });
+      req.body.slug = slug;
+
+      const result = await insertProduct({
+        ...req.body,
+        images,
+        thumbnail: images[0],
+      });
+      console.log(result);
+      result?._id
+        ? res.json({
+            status: "success",
+            message: "New product has been created",
+          })
+        : res.json({
+            status: "error",
+            message: "Error creating new product, please try again later",
+          });
+    } catch (error) {
+      // duplicate slug and the SKU
+      if (error.message.includes("E11000 duplicate key")) {
+        error.status = 200;
+        error.message =
+          "Another product with similar either Name or SKU already exist";
+      }
+      next(error);
     }
-    next(error);
   }
-});
+);
 
 router.delete("/", async (req, res, next) => {
   try {
