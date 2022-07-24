@@ -52,6 +52,11 @@ export const newProductValidation = (req, res, next) => {
 
 export const updateProductValidation = (req, res, next) => {
   try {
+    req.body.salesStartDate =
+      req.body.salesStartDate === "null" ? null : req.body.salesStartDate;
+    req.body.salesEndDate =
+      req.body.salesEndDate === "null" ? null : req.body.salesEndDate;
+
     const schema = Joi.object({
       _id: SHORTSTR.required(),
       status: SHORTSTR.required(),
@@ -63,6 +68,9 @@ export const updateProductValidation = (req, res, next) => {
       salesStartDate: DATE.allow(null),
       salesEndDate: DATE.allow(null),
       catId: SHORTSTR.required(),
+      thumbnail: SHORTSTR,
+      images: LONGSTR.allow(null, ""),
+      imgToDelete: LONGSTR.allow(null, ""),
     });
 
     validator(schema, req, res, next);

@@ -116,23 +116,47 @@ router.delete("/", async (req, res, next) => {
   }
 });
 
-router.put("/", updateProductValidation, async (req, res, next) => {
-  try {
-    const { _id, ...rest } = req.body;
-    const result = await updateProductById({ _id }, rest);
+router.put(
+  "/",
+  upload.array("newImages", 5),
+  updateProductValidation,
+  async (req, res, next) => {
+    try {
+      console.log(req.body);
 
-    result?._id
-      ? res.json({
-          status: "success",
-          message: "Product has been updated",
-        })
-      : res.json({
-          status: "error",
-          message: "Unable to update the product, please try again later",
-        });
-  } catch (error) {
-    next(error);
+      const { _id, imgToDelete, ...rest } = req.body;
+      //1. make new array for the images and replace in the database
+      const files = req.files;
+
+      const images = files.map((img) => img.path); // new images
+      const oldImgList = rest.images; // old images from database
+      // imgToDelete holds the iages that is in the oldImgList that need to be removed
+
+      //remove deleted image from oldImageList
+      const filteredImages = oldImgList.filter(
+        (img) => !imgToDelete.includes(img)
+      );
+
+      rest.images = {
+        ...filteredImages,
+        ...images,
+      };
+      //2. delete image from the file system
+      const result = await updateProductById({ _id }, rest);
+
+      result?._id
+        ? res.json({
+            status: "success",
+            message: "Product has been updated",
+          })
+        : res.json({
+            status: "error",
+            message: "Unable to update the product, please try again later",
+          });
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 export default router;
