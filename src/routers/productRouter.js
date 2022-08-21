@@ -18,15 +18,12 @@ import {
 import multer from "multer";
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log(file);
     let error = null;
-    // validation test
 
-    cb(error, "public/img/products");
+    cb(error, "./public/img/products");
   },
   filename: (req, file, cb) => {
     const fullFileName = Date.now() + "-" + file.originalname;
-
     cb(null, fullFileName);
   },
 });
@@ -49,6 +46,7 @@ router.get("/:_id?", async (req, res, next) => {
       result,
     });
   } catch (error) {
+    error.status = 500;
     next(error);
   }
 });
@@ -59,6 +57,7 @@ router.post(
   newProductValidation,
   async (req, res, next) => {
     try {
+      console.log(req.body);
       const files = req.files;
 
       const images = files.map((img) => img.path);
@@ -125,11 +124,12 @@ router.put(
       console.log(req.body);
 
       const { _id, imgToDelete, ...rest } = req.body;
+
       //1. make new array for the images and replace in the database
       const files = req.files;
 
       const images = files.map((img) => img.path); // new images
-      const oldImgList = rest.images; // old images from database
+      const oldImgList = rest.images.split(","); // old images from database
       // imgToDelete holds the iages that is in the oldImgList that need to be removed
 
       //remove deleted image from oldImageList
@@ -137,17 +137,15 @@ router.put(
         (img) => !imgToDelete.includes(img)
       );
 
-      rest.images = {
-        ...filteredImages,
-        ...images,
-      };
+      rest.images = [...filteredImages, ...images];
       //2. delete image from the file system
-      const result = await updateProductById({ _id }, rest);
+      const result = await updateProductById(_id, rest);
 
       result?._id
         ? res.json({
             status: "success",
             message: "Product has been updated",
+            result,
           })
         : res.json({
             status: "error",

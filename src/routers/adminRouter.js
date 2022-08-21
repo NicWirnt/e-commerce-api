@@ -261,4 +261,41 @@ router.patch("/password", async (req, res, next) => {
   }
 });
 
+//Update password by the logined admin
+router.patch("/password", async (req, res, next) => {
+  try {
+    const { otp, email, password } = req.body;
+
+    // 1. get session info based on the otp, so that we get the user email
+    const session = await deleteSession({ token: otp, associate: email });
+
+    if (session?._id) {
+      // 2. based on the email, update the password in the database after encrypting
+      const update = {
+        password: encryptPassword(password),
+      };
+
+      const updatedUser = await updateAdmin({ email }, update);
+
+      if (updatedUser?._id) {
+        // send the email notification{
+        profileUpdateNotificaiton({
+          fName: updatedUser.fName,
+          email: updatedUser.email,
+        });
+        return res.json({
+          status: "success",
+          message: "Your password has been updated",
+        });
+      }
+    }
+    res.json({
+      status: "error",
+      message: "Invalid Request, unable to update the password",
+    });
+  } catch (error) {
+    error.status = 500;
+    next(error);
+  }
+});
 export default router;

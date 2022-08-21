@@ -42,6 +42,7 @@ export const newProductValidation = (req, res, next) => {
       salesStartDate: DATE.allow(null),
       salesEndDate: DATE.allow(null),
       catId: SHORTSTR.required(),
+      images: LONGSTR,
     });
 
     validator(schema, req, res, next);
