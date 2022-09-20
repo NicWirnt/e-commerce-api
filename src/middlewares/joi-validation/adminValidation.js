@@ -60,6 +60,16 @@ export const loginValidation = (req, res, next) => {
   validator(schema, req, res, next);
 };
 
+export const updatePasswordValidation = (req, res, next) => {
+  const schema = Joi.object({
+    email: EMAIL,
+    password: PASSWORD,
+    currentPassword: PASSWORD,
+  });
+
+  validator(schema, req, res, next);
+};
+
 // "phone" : 1234567890,
 // "address" : "SYDNEY",
 // "password" : "admin"

@@ -37,6 +37,16 @@ Content-Type: application/json
     "password" : "123456"
 }
 
+### Admin update password API
+PATCH  http://localhost:8000/api/v1/admin/update-password
+Content-Type: application/json
+
+{
+    "email" : "sam@email.com",
+    "password" : "Cba123",
+    "currentPassword" : "Abc123"
+}
+
 ###### CATEGORY API #######
 
 ### Create new Category

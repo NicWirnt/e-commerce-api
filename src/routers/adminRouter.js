@@ -5,6 +5,7 @@ import {
   loginValidation,
   newAdminValidation,
   updateAdminValidation,
+  updatePasswordValidation,
 } from "../middlewares/joi-validation/adminValidation.js";
 import {
   getAdmin,
@@ -262,40 +263,44 @@ router.patch("/password", async (req, res, next) => {
 });
 
 //Update password by the logined admin
-router.patch("/password", async (req, res, next) => {
-  try {
-    const { otp, email, password } = req.body;
+router.patch(
+  "/update-password",
+  updatePasswordValidation,
+  async (req, res, next) => {
+    try {
+      const { currentPassword, email, password } = req.body;
 
-    // 1. get session info based on the otp, so that we get the user email
-    const session = await deleteSession({ token: otp, associate: email });
+      const user = await getAdmin({ email });
+      if (user?._id) {
+        const isMatched = verifyPassword(currentPassword, user.password);
+        if (isMatched) {
+          const hashPassword = encryptPassword(password);
 
-    if (session?._id) {
-      // 2. based on the email, update the password in the database after encrypting
-      const update = {
-        password: encryptPassword(password),
-      };
+          const updatedUser = await updateAdmin(
+            { _id: user._id },
+            { password: hashPassword }
+          );
 
-      const updatedUser = await updateAdmin({ email }, update);
-
-      if (updatedUser?._id) {
-        // send the email notification{
-        profileUpdateNotificaiton({
-          fName: updatedUser.fName,
-          email: updatedUser.email,
-        });
-        return res.json({
-          status: "success",
-          message: "Your password has been updated",
-        });
+          if (updatedUser?._id) {
+            profileUpdateNotificaiton({
+              fName: updatedUser.fName,
+              email: updatedUser.email,
+            });
+            return res.json({
+              status: "success",
+              message: "Your Password has been updated successfully!",
+            });
+          }
+        }
       }
+      res.json({
+        status: "error",
+        message: "ERROR! unable to update the password, please try again later",
+      });
+    } catch (error) {
+      error.status = 500;
+      next(error);
     }
-    res.json({
-      status: "error",
-      message: "Invalid Request, unable to update the password",
-    });
-  } catch (error) {
-    error.status = 500;
-    next(error);
   }
-});
+);
 export default router;
