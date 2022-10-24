@@ -16,7 +16,7 @@ Content-Type: application/json
     "phone" : "1234567890",
     "address" : "SYDNEY",
     "dob" : "2020-02-20",
-    "password" : "admin"
+    "password" : "Abc123"
 }
 
 ### POST ADMIN EMAIL VERIFICATION API
@@ -33,8 +33,8 @@ POST http://localhost:8000/api/v1/admin/login
 Content-Type: application/json
 
 {
-    "email" : "sam@email.com",
-    "password" : "123456"
+    "email" : "a@a.com",
+    "password" : "Abc123"
 }
 
 ### Admin update password API
@@ -47,16 +47,23 @@ Content-Type: application/json
     "currentPassword" : "Abc123"
 }
 
+### request new access JWT
+GET http://localhost:8000/api/v1/admin/accessjwt
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE2NjY1ODc2NzEsImV4cCI6MTY2OTE3OTY3MX0.6_qMptoj8t89AIOOsHuxQPj7GhgZQTBZ40CjnMNiJgM
+# "accessJWT": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE2NjY1ODQ2ODIsImV4cCI6MTY2NjU4NDc0Mn0.5jQMSU8AW5z-bjyWQ32z7_JpPA-3igpUsv5z6Kq_w8Y",
+#   "refreshJWT": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE2NjY1ODQ2ODIsImV4cCI6MTY2OTE3NjY4Mn0.6ZPsAtSPf6T6kW9F35Dh0KGp9efr8mxXBF3WI1nzYEQ"
+
 ###### CATEGORY API #######
 
 ### Create new Category
 POST http://localhost:8000/api/v1/category/
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE2NjY1ODM4NDMsImV4cCI6MTY2NjU4MzkwM30.rZpxm98MdR_WE1S0Vr4AVhbIME1II6fo6yNhDtABOmI
 
 {
     "status" : "inactive",
     
-    "catName" : "Gun"
+    "catName" : "R/C Plane"
 }
 
 ###get all active categories

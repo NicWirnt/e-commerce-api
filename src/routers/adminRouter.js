@@ -1,5 +1,5 @@
 import express from "express";
-import { encryptPassword, verifyPassword } from "../../helpers/bcrypthelper.js";
+import { encryptPassword, verifyPassword } from "../helpers/bcrypthelper.js";
 import {
   emailVerificationValidation,
   loginValidation,
@@ -17,18 +17,29 @@ import {
   otpNotificaiton,
   profileUpdateNotificaiton,
   sendMail,
-} from "../../helpers/emailHelper.js";
-import { createOtp } from "../../helpers/randomGeneratorHelper.js";
+} from "../helpers/emailHelper.js";
+import { createOtp } from "../helpers/randomGeneratorHelper.js";
 import {
   deleteSession,
   getSession,
   insertSession,
 } from "../session/SessionModel.js";
+import {
+  createJWTs,
+  signAccessJwt,
+  verifyRefreshjwt,
+} from "../helpers/jwtHelper.js";
+import { adminAuth } from "../middlewares/auth-middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.get("/", adminAuth, (req, res) => {
   try {
+    let user = req.adminInfo;
+
+    user.password = undefined;
+    user.refreshJWT = undefined;
+
     res.json({
       status: "success",
       message: "GET hit to admin Router",
@@ -42,7 +53,7 @@ router.get("/", (req, res) => {
 });
 
 // new Admin Registration
-router.post("/", newAdminValidation, async (req, res, next) => {
+router.post("/", adminAuth, newAdminValidation, async (req, res, next) => {
   try {
     const hashPassword = encryptPassword(req.body.password);
     req.body.password = hashPassword;
@@ -80,6 +91,86 @@ router.post("/", newAdminValidation, async (req, res, next) => {
     next(error);
   }
 });
+
+// update admin profile
+router.put("/", adminAuth, updateAdminValidation, async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await getAdmin({ email });
+
+    if (user?._id) {
+      const isMatched = verifyPassword(password, user.password);
+
+      if (isMatched) {
+        //update user
+        const { _id, password, ...rest } = req.body;
+        const updatedAdmin = await updateAdmin({ _id }, rest);
+        if (updatedAdmin?._id) {
+          //send email notification saying profile is update
+          profileUpdateNotificaiton({
+            fName: updatedAdmin.fName,
+            email: updatedAdmin.email,
+          });
+          return res.json({
+            status: "success",
+            message: "Your profile has been updated successfully",
+            user: updatedAdmin,
+          });
+        }
+      }
+    }
+    res.json({
+      status: "error",
+      message: "Invalid request, your profile did not get updated",
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+//Update password by the logined admin
+router.patch(
+  "/update-password",
+  adminAuth,
+  updatePasswordValidation,
+  async (req, res, next) => {
+    try {
+      const { currentPassword, email, password } = req.body;
+
+      const user = await getAdmin({ email });
+      if (user?._id) {
+        const isMatched = verifyPassword(currentPassword, user.password);
+        if (isMatched) {
+          const hashPassword = encryptPassword(password);
+
+          const updatedUser = await updateAdmin(
+            { _id: user._id },
+            { password: hashPassword }
+          );
+
+          if (updatedUser?._id) {
+            profileUpdateNotificaiton({
+              fName: updatedUser.fName,
+              email: updatedUser.email,
+            });
+            return res.json({
+              status: "success",
+              message: "Your Password has been updated successfully!",
+            });
+          }
+        }
+      }
+      res.json({
+        status: "error",
+        message: "ERROR! unable to update the password, please try again later",
+      });
+    } catch (error) {
+      error.status = 500;
+      next(error);
+    }
+  }
+);
 
 // email verification router
 router.post(
@@ -130,10 +221,14 @@ router.post("/login", loginValidation, async (req, res, next) => {
       //when undefined, api wont send the undefined value
       if (isMatched) {
         user.password = undefined;
+        user.refreshJWT = undefined;
+        const jwts = await createJWTs({ email: user.email });
+
         res.json({
           status: "success",
           message: "User Logged in successfully",
           user,
+          ...jwts,
         });
         return;
       }
@@ -144,43 +239,6 @@ router.post("/login", loginValidation, async (req, res, next) => {
     });
   } catch (error) {
     error.status = 500;
-    next(error);
-  }
-});
-
-// update admin profile
-router.put("/", updateAdminValidation, async (req, res, next) => {
-  try {
-    const { email, password } = req.body;
-
-    const user = await getAdmin({ email });
-
-    if (user?._id) {
-      const isMatched = verifyPassword(password, user.password);
-
-      if (isMatched) {
-        //update user
-        const { _id, password, ...rest } = req.body;
-        const updatedAdmin = await updateAdmin({ _id }, rest);
-        if (updatedAdmin?._id) {
-          //send email notification saying profile is update
-          profileUpdateNotificaiton({
-            fName: updatedAdmin.fName,
-            email: updatedAdmin.email,
-          });
-          return res.json({
-            status: "success",
-            message: "Your profile has been updated successfully",
-            user: updatedAdmin,
-          });
-        }
-      }
-    }
-    res.json({
-      status: "error",
-      message: "Invalid request, your profile did not get updated",
-    });
-  } catch (error) {
     next(error);
   }
 });
@@ -262,45 +320,34 @@ router.patch("/password", async (req, res, next) => {
   }
 });
 
-//Update password by the logined admin
-router.patch(
-  "/update-password",
-  updatePasswordValidation,
-  async (req, res, next) => {
-    try {
-      const { currentPassword, email, password } = req.body;
+// this will return new access JWT
+router.get("/accessjwt", async (req, res, next) => {
+  try {
+    const refreshJWT = req.headers.authorization;
+    const decoded = verifyRefreshjwt(refreshJWT);
 
-      const user = await getAdmin({ email });
+    console.log(decoded);
+    if (decoded?.email) {
+      const user = await getAdmin({ email: decoded.email, refreshJWT });
+      console.log(user);
       if (user?._id) {
-        const isMatched = verifyPassword(currentPassword, user.password);
-        if (isMatched) {
-          const hashPassword = encryptPassword(password);
-
-          const updatedUser = await updateAdmin(
-            { _id: user._id },
-            { password: hashPassword }
-          );
-
-          if (updatedUser?._id) {
-            profileUpdateNotificaiton({
-              fName: updatedUser.fName,
-              email: updatedUser.email,
-            });
-            return res.json({
-              status: "success",
-              message: "Your Password has been updated successfully!",
-            });
-          }
-        }
+        // create new access token and return it
+        const accessJWT = await signAccessJwt({ email: decoded.email });
+        res.json({
+          status: "success",
+          accessJWT,
+        });
       }
-      res.json({
-        status: "error",
-        message: "ERROR! unable to update the password, please try again later",
-      });
-    } catch (error) {
-      error.status = 500;
-      next(error);
     }
+    res.status(401).json({
+      status: "error",
+      message: "Log out user",
+    });
+    // check refJWT valid and exist in DB
+    // create new accessJWT and return it
+  } catch (error) {
+    console.log(error);
+    next(error);
   }
-);
+});
 export default router;

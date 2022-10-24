@@ -4,6 +4,8 @@
 
 all the api end points will follow the following pattersn `{rootUrl}/api/v1`
 
+### Admin Apis
+
 ### Category Apis
 
 this api endpoint is responsible for handling all the category related api call
