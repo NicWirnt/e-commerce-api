@@ -43,6 +43,7 @@ router.get("/", adminAuth, (req, res) => {
     res.json({
       status: "success",
       message: "GET hit to admin Router",
+      user,
     });
   } catch (error) {
     res.json({
@@ -326,7 +327,6 @@ router.get("/accessjwt", async (req, res, next) => {
     const refreshJWT = req.headers.authorization;
     const decoded = verifyRefreshjwt(refreshJWT);
 
-    console.log(decoded);
     if (decoded?.email) {
       const user = await getAdmin({ email: decoded.email, refreshJWT });
       console.log(user);
@@ -346,7 +346,6 @@ router.get("/accessjwt", async (req, res, next) => {
     // check refJWT valid and exist in DB
     // create new accessJWT and return it
   } catch (error) {
-    console.log(error);
     next(error);
   }
 });

@@ -9,7 +9,7 @@ export const adminAuth = async (req, res, next) => {
     if (req.headers) {
       //check if it is valid and not expired
       const decoded = verifyAccessJwt(authorization);
-      console.log(decoded);
+
       if (decoded === "jwt expired") {
         return res.status(403).json({
           status: "error",

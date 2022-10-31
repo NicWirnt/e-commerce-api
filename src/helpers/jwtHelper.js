@@ -42,7 +42,7 @@ export const verifyAccessJwt = (token) => {
     if (error.message === "jwt expired") {
       deleteSession({ type: "jwt", token });
     }
-    console.log(error.message);
+
     return error.message;
   }
 };
