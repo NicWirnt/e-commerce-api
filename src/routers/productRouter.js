@@ -57,7 +57,6 @@ router.post(
   newProductValidation,
   async (req, res, next) => {
     try {
-      console.log(req.body);
       const files = req.files;
 
       const images = files.map((img) => img.path);
@@ -71,7 +70,7 @@ router.post(
         images,
         thumbnail: images[0],
       });
-      console.log(result);
+
       result?._id
         ? res.json({
             status: "success",
@@ -121,8 +120,6 @@ router.put(
   updateProductValidation,
   async (req, res, next) => {
     try {
-      console.log(req.body);
-
       const { _id, imgToDelete, ...rest } = req.body;
 
       //1. make new array for the images and replace in the database

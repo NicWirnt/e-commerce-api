@@ -329,7 +329,7 @@ router.get("/accessjwt", async (req, res, next) => {
 
     if (decoded?.email) {
       const user = await getAdmin({ email: decoded.email, refreshJWT });
-      console.log(user);
+
       if (user?._id) {
         // create new access token and return it
         const accessJWT = await signAccessJwt({ email: decoded.email });
@@ -346,6 +346,7 @@ router.get("/accessjwt", async (req, res, next) => {
     // check refJWT valid and exist in DB
     // create new accessJWT and return it
   } catch (error) {
+    error.status = 401;
     next(error);
   }
 });

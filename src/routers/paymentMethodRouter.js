@@ -16,7 +16,7 @@ router.get("/:_id?", async (req, res, next) => {
     const result = _id
       ? await getPaymentMethods({ _id })
       : await getAllPaymentMethods();
-    console.log(result);
+
     result?.length
       ? res.json({
           status: "success",
