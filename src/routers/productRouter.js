@@ -36,14 +36,14 @@ router.get("/:_id?", async (req, res, next) => {
   try {
     const { _id } = req.params;
 
-    const result = _id
+    const products = _id
       ? await getProduct({ _id })
       : await getMultipleProducts();
 
     res.json({
       status: "success",
       message: "Product List",
-      result,
+      products,
     });
   } catch (error) {
     error.status = 500;
