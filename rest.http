@@ -169,3 +169,8 @@ GET http://localhost:8000/api/v1/customers/
 #### RATING API
 #### GET RATINGS
 GET http://localhost:8000/api/v1/reviews/
+
+
+#### ORDERS API
+#### GET ORDERS
+GET http://localhost:8000/api/v1/orders/

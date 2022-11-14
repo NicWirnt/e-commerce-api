@@ -31,6 +31,7 @@ import paymentMethodRouter from "./src/routers/paymentMethodRouter.js";
 import { adminAuth } from "./src/middlewares/auth-middlewares/authMiddleware.js";
 import customerRouter from "./src/routers/customerRouter.js";
 import reviewRouter from "./src/routers/reviewRouter.js";
+import orderRouter from "./src/routers/orderRouter.js";
 
 app.use("/api/v1/admin", adminRouter);
 app.use("/api/v1/category", adminAuth, categoryRouter);
@@ -38,6 +39,7 @@ app.use("/api/v1/products", adminAuth, productRouter);
 app.use("/api/v1/payment-method", adminAuth, paymentMethodRouter);
 app.use("/api/v1/customers", adminAuth, customerRouter);
 app.use("/api/v1/reviews", reviewRouter);
+app.use("/api/v1/orders", orderRouter);
 
 app.get("/", (req, res) => {
   res.json({
