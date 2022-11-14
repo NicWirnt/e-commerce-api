@@ -54,6 +54,7 @@ export const createOrders = () => {
         lName: "wira",
         email: "nicowraianta@gmail.com",
         phone: "123132123123",
+        address: "abcabc",
       },
       cart: [
         {
@@ -99,6 +100,7 @@ export const createOrders = () => {
         lName: "wira",
         email: "nicowraianta@gmail.com",
         phone: "123132123123",
+        address: "abcabc",
       },
       cart: [
         {
@@ -144,6 +146,7 @@ export const createOrders = () => {
         lName: "wira",
         email: "nicowraianta@gmail.com",
         phone: "123132123123",
+        address: "abcabc",
       },
       cart: [
         {
