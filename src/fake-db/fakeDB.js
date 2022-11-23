@@ -63,6 +63,7 @@ export const createOrders = () => {
           salePrice: "50",
           qty: 4,
           thumbnail: "http://",
+          subTotal: 200,
         },
         {
           productId: "asdfkjksdfj32",
@@ -70,6 +71,7 @@ export const createOrders = () => {
           salePrice: "50",
           qty: 4,
           thumbnail: "http://",
+          subTotal: 200,
         },
         {
           productId: "asd92341kd",
@@ -77,6 +79,7 @@ export const createOrders = () => {
           salePrice: "50",
           qty: 4,
           thumbnail: "http://",
+          subTotal: 200,
         },
       ],
       cartTotal: "200",
@@ -109,6 +112,7 @@ export const createOrders = () => {
           salePrice: "50",
           qty: 4,
           thumbnail: "http://",
+          subTotal: 200,
         },
         {
           productId: "asdfkjksdfj32",
@@ -116,6 +120,7 @@ export const createOrders = () => {
           salePrice: "50",
           qty: 4,
           thumbnail: "http://",
+          subTotal: 200,
         },
         {
           productId: "asd92341kd",
@@ -123,6 +128,7 @@ export const createOrders = () => {
           salePrice: "50",
           qty: 4,
           thumbnail: "http://",
+          subTotal: 200,
         },
       ],
       cartTotal: "200",
@@ -155,6 +161,7 @@ export const createOrders = () => {
           salePrice: "50",
           qty: 4,
           thumbnail: "http://",
+          subTotal: 200,
         },
         {
           productId: "asdfkjksdfj32",
@@ -162,6 +169,7 @@ export const createOrders = () => {
           salePrice: "50",
           qty: 4,
           thumbnail: "http://",
+          subTotal: 200,
         },
         {
           productId: "asd92341kd",
@@ -169,6 +177,7 @@ export const createOrders = () => {
           salePrice: "50",
           qty: 4,
           thumbnail: "http://",
+          subTotal: 200,
         },
       ],
       cartTotal: "200",
@@ -185,7 +194,7 @@ export const createOrders = () => {
     },
     {
       _id: "4",
-      status: "completed", // processing, complete, cancelled
+      status: "shipped", // processing, complete, cancelled
       buyer: {
         buyerId: "23423432", // _id of the user
         fName: "Nico",
@@ -200,6 +209,7 @@ export const createOrders = () => {
           salePrice: "50",
           qty: 4,
           thumbnail: "http://",
+          subTotal: 200,
         },
         {
           productId: "asdfkjksdfj32",
@@ -207,6 +217,7 @@ export const createOrders = () => {
           salePrice: "50",
           qty: 4,
           thumbnail: "http://",
+          subTotal: 200,
         },
         {
           productId: "asd92341kd",
@@ -214,6 +225,7 @@ export const createOrders = () => {
           salePrice: "50",
           qty: 4,
           thumbnail: "http://",
+          subTotal: 200,
         },
       ],
       cartTotal: "200",
@@ -245,6 +257,7 @@ export const createOrders = () => {
           salePrice: "50",
           qty: 4,
           thumbnail: "http://",
+          subTotal: 200,
         },
         {
           productId: "asdfkjksdfj32",
@@ -252,6 +265,7 @@ export const createOrders = () => {
           salePrice: "50",
           qty: 4,
           thumbnail: "http://",
+          subTotal: 200,
         },
         {
           productId: "asd92341kd",
@@ -259,6 +273,979 @@ export const createOrders = () => {
           salePrice: "50",
           qty: 4,
           thumbnail: "http://",
+          subTotal: 200,
+        },
+      ],
+      cartTotal: "200",
+      discount: "50",
+      discountCode: "hahsdf",
+      totalAmount: "100",
+      paymentInfo: {
+        status: "paid", // pending or paid
+        method: "cash on pickup", //credic card, debit, etc
+        paidAmount: "2302",
+        transactionId: "ja81324jkh",
+        paidDate: "11/11/2022",
+      },
+    },
+    {
+      _id: "1",
+      status: "processing", // processing, complete, cancelled
+      buyer: {
+        buyerId: "23423432", // _id of the user
+        fName: "Nico",
+        lName: "wira",
+        email: "nicowraianta@gmail.com",
+        phone: "123132123123",
+        address: "abcabc",
+      },
+      cart: [
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asdfkjksdfj32",
+          productName: "Small gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+      ],
+      cartTotal: "200",
+      discount: "50",
+      discountCode: "hahsdf",
+      totalAmount: "100",
+      paymentInfo: {
+        status: "paid", // pending or paid
+        method: "cash on pickup", //credic card, debit, etc
+        paidAmount: "2302",
+        transactionId: "ja81324jkh",
+        paidDate: "11/11/2022",
+      },
+    },
+    {
+      _id: "2",
+      status: "processing", // processing, complete, cancelled
+      buyer: {
+        buyerId: "23423432", // _id of the user
+        fName: "Nico",
+        lName: "wira",
+        email: "nicowraianta@gmail.com",
+        phone: "123132123123",
+        address: "abcabc",
+      },
+      cart: [
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asdfkjksdfj32",
+          productName: "Small gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+      ],
+      cartTotal: "200",
+      discount: "50",
+      discountCode: "hahsdf",
+      totalAmount: "100",
+      paymentInfo: {
+        status: "paid", // pending or paid
+        method: "cash on pickup", //credic card, debit, etc
+        paidAmount: "2302",
+        transactionId: "ja81324jkh",
+        paidDate: "11/11/2022",
+      },
+    },
+    {
+      _id: "3",
+      status: "processing", // processing, complete, cancelled
+      buyer: {
+        buyerId: "23423432", // _id of the user
+        fName: "Nico",
+        lName: "wira",
+        email: "nicowraianta@gmail.com",
+        phone: "123132123123",
+        address: "abcabc",
+      },
+      cart: [
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asdfkjksdfj32",
+          productName: "Small gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+      ],
+      cartTotal: "200",
+      discount: "50",
+      discountCode: "hahsdf",
+      totalAmount: "100",
+      paymentInfo: {
+        status: "paid", // pending or paid
+        method: "cash on pickup", //credic card, debit, etc
+        paidAmount: "2302",
+        transactionId: "ja81324jkh",
+        paidDate: "11/11/2022",
+      },
+    },
+    {
+      _id: "4",
+      status: "shipped", // processing, complete, cancelled
+      buyer: {
+        buyerId: "23423432", // _id of the user
+        fName: "Nico",
+        lName: "wira",
+        email: "nicowraianta@gmail.com",
+        phone: "123132123123",
+      },
+      cart: [
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asdfkjksdfj32",
+          productName: "Small gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+      ],
+      cartTotal: "200",
+      discount: "50",
+      discountCode: "hahsdf",
+      totalAmount: "100",
+      paymentInfo: {
+        status: "paid", // pending or paid
+        method: "cash on pickup", //credic card, debit, etc
+        paidAmount: "2302",
+        transactionId: "ja81324jkh",
+        paidDate: "11/11/2022",
+      },
+    },
+    {
+      _id: "5",
+      status: "cancelled", // processing, complete, cancelled
+      buyer: {
+        buyerId: "23423432", // _id of the user
+        fName: "Nico",
+        lName: "wira",
+        email: "nicowraianta@gmail.com",
+        phone: "123132123123",
+      },
+      cart: [
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asdfkjksdfj32",
+          productName: "Small gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+      ],
+      cartTotal: "200",
+      discount: "50",
+      discountCode: "hahsdf",
+      totalAmount: "100",
+      paymentInfo: {
+        status: "paid", // pending or paid
+        method: "cash on pickup", //credic card, debit, etc
+        paidAmount: "2302",
+        transactionId: "ja81324jkh",
+        paidDate: "11/11/2022",
+      },
+    },
+    {
+      _id: "1",
+      status: "processing", // processing, complete, cancelled
+      buyer: {
+        buyerId: "23423432", // _id of the user
+        fName: "Nico",
+        lName: "wira",
+        email: "nicowraianta@gmail.com",
+        phone: "123132123123",
+        address: "abcabc",
+      },
+      cart: [
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asdfkjksdfj32",
+          productName: "Small gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+      ],
+      cartTotal: "200",
+      discount: "50",
+      discountCode: "hahsdf",
+      totalAmount: "100",
+      paymentInfo: {
+        status: "paid", // pending or paid
+        method: "cash on pickup", //credic card, debit, etc
+        paidAmount: "2302",
+        transactionId: "ja81324jkh",
+        paidDate: "11/11/2022",
+      },
+    },
+    {
+      _id: "2",
+      status: "processing", // processing, complete, cancelled
+      buyer: {
+        buyerId: "23423432", // _id of the user
+        fName: "Nico",
+        lName: "wira",
+        email: "nicowraianta@gmail.com",
+        phone: "123132123123",
+        address: "abcabc",
+      },
+      cart: [
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asdfkjksdfj32",
+          productName: "Small gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+      ],
+      cartTotal: "200",
+      discount: "50",
+      discountCode: "hahsdf",
+      totalAmount: "100",
+      paymentInfo: {
+        status: "paid", // pending or paid
+        method: "cash on pickup", //credic card, debit, etc
+        paidAmount: "2302",
+        transactionId: "ja81324jkh",
+        paidDate: "11/11/2022",
+      },
+    },
+    {
+      _id: "3",
+      status: "processing", // processing, complete, cancelled
+      buyer: {
+        buyerId: "23423432", // _id of the user
+        fName: "Nico",
+        lName: "wira",
+        email: "nicowraianta@gmail.com",
+        phone: "123132123123",
+        address: "abcabc",
+      },
+      cart: [
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asdfkjksdfj32",
+          productName: "Small gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+      ],
+      cartTotal: "200",
+      discount: "50",
+      discountCode: "hahsdf",
+      totalAmount: "100",
+      paymentInfo: {
+        status: "paid", // pending or paid
+        method: "cash on pickup", //credic card, debit, etc
+        paidAmount: "2302",
+        transactionId: "ja81324jkh",
+        paidDate: "11/11/2022",
+      },
+    },
+    {
+      _id: "4",
+      status: "shipped", // processing, complete, cancelled
+      buyer: {
+        buyerId: "23423432", // _id of the user
+        fName: "Nico",
+        lName: "wira",
+        email: "nicowraianta@gmail.com",
+        phone: "123132123123",
+      },
+      cart: [
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asdfkjksdfj32",
+          productName: "Small gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+      ],
+      cartTotal: "200",
+      discount: "50",
+      discountCode: "hahsdf",
+      totalAmount: "100",
+      paymentInfo: {
+        status: "paid", // pending or paid
+        method: "cash on pickup", //credic card, debit, etc
+        paidAmount: "2302",
+        transactionId: "ja81324jkh",
+        paidDate: "11/11/2022",
+      },
+    },
+    {
+      _id: "5",
+      status: "cancelled", // processing, complete, cancelled
+      buyer: {
+        buyerId: "23423432", // _id of the user
+        fName: "Nico",
+        lName: "wira",
+        email: "nicowraianta@gmail.com",
+        phone: "123132123123",
+      },
+      cart: [
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asdfkjksdfj32",
+          productName: "Small gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+      ],
+      cartTotal: "200",
+      discount: "50",
+      discountCode: "hahsdf",
+      totalAmount: "100",
+      paymentInfo: {
+        status: "paid", // pending or paid
+        method: "cash on pickup", //credic card, debit, etc
+        paidAmount: "2302",
+        transactionId: "ja81324jkh",
+        paidDate: "11/11/2022",
+      },
+    },
+    {
+      _id: "1",
+      status: "processing", // processing, complete, cancelled
+      buyer: {
+        buyerId: "23423432", // _id of the user
+        fName: "Nico",
+        lName: "wira",
+        email: "nicowraianta@gmail.com",
+        phone: "123132123123",
+        address: "abcabc",
+      },
+      cart: [
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asdfkjksdfj32",
+          productName: "Small gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+      ],
+      cartTotal: "200",
+      discount: "50",
+      discountCode: "hahsdf",
+      totalAmount: "100",
+      paymentInfo: {
+        status: "paid", // pending or paid
+        method: "cash on pickup", //credic card, debit, etc
+        paidAmount: "2302",
+        transactionId: "ja81324jkh",
+        paidDate: "11/11/2022",
+      },
+    },
+    {
+      _id: "2",
+      status: "processing", // processing, complete, cancelled
+      buyer: {
+        buyerId: "23423432", // _id of the user
+        fName: "Nico",
+        lName: "wira",
+        email: "nicowraianta@gmail.com",
+        phone: "123132123123",
+        address: "abcabc",
+      },
+      cart: [
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asdfkjksdfj32",
+          productName: "Small gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+      ],
+      cartTotal: "200",
+      discount: "50",
+      discountCode: "hahsdf",
+      totalAmount: "100",
+      paymentInfo: {
+        status: "paid", // pending or paid
+        method: "cash on pickup", //credic card, debit, etc
+        paidAmount: "2302",
+        transactionId: "ja81324jkh",
+        paidDate: "11/11/2022",
+      },
+    },
+    {
+      _id: "3",
+      status: "processing", // processing, complete, cancelled
+      buyer: {
+        buyerId: "23423432", // _id of the user
+        fName: "Nico",
+        lName: "wira",
+        email: "nicowraianta@gmail.com",
+        phone: "123132123123",
+        address: "abcabc",
+      },
+      cart: [
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asdfkjksdfj32",
+          productName: "Small gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+      ],
+      cartTotal: "200",
+      discount: "50",
+      discountCode: "hahsdf",
+      totalAmount: "100",
+      paymentInfo: {
+        status: "paid", // pending or paid
+        method: "cash on pickup", //credic card, debit, etc
+        paidAmount: "2302",
+        transactionId: "ja81324jkh",
+        paidDate: "11/11/2022",
+      },
+    },
+    {
+      _id: "4",
+      status: "shipped", // processing, complete, cancelled
+      buyer: {
+        buyerId: "23423432", // _id of the user
+        fName: "Nico",
+        lName: "wira",
+        email: "nicowraianta@gmail.com",
+        phone: "123132123123",
+      },
+      cart: [
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asdfkjksdfj32",
+          productName: "Small gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+      ],
+      cartTotal: "200",
+      discount: "50",
+      discountCode: "hahsdf",
+      totalAmount: "100",
+      paymentInfo: {
+        status: "paid", // pending or paid
+        method: "cash on pickup", //credic card, debit, etc
+        paidAmount: "2302",
+        transactionId: "ja81324jkh",
+        paidDate: "11/11/2022",
+      },
+    },
+    {
+      _id: "5",
+      status: "cancelled", // processing, complete, cancelled
+      buyer: {
+        buyerId: "23423432", // _id of the user
+        fName: "Nico",
+        lName: "wira",
+        email: "nicowraianta@gmail.com",
+        phone: "123132123123",
+      },
+      cart: [
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asdfkjksdfj32",
+          productName: "Small gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+      ],
+      cartTotal: "200",
+      discount: "50",
+      discountCode: "hahsdf",
+      totalAmount: "100",
+      paymentInfo: {
+        status: "paid", // pending or paid
+        method: "cash on pickup", //credic card, debit, etc
+        paidAmount: "2302",
+        transactionId: "ja81324jkh",
+        paidDate: "11/11/2022",
+      },
+    },
+    {
+      _id: "1",
+      status: "processing", // processing, complete, cancelled
+      buyer: {
+        buyerId: "23423432", // _id of the user
+        fName: "Nico",
+        lName: "wira",
+        email: "nicowraianta@gmail.com",
+        phone: "123132123123",
+        address: "abcabc",
+      },
+      cart: [
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asdfkjksdfj32",
+          productName: "Small gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+      ],
+      cartTotal: "200",
+      discount: "50",
+      discountCode: "hahsdf",
+      totalAmount: "100",
+      paymentInfo: {
+        status: "paid", // pending or paid
+        method: "cash on pickup", //credic card, debit, etc
+        paidAmount: "2302",
+        transactionId: "ja81324jkh",
+        paidDate: "11/11/2022",
+      },
+    },
+    {
+      _id: "2",
+      status: "processing", // processing, complete, cancelled
+      buyer: {
+        buyerId: "23423432", // _id of the user
+        fName: "Nico",
+        lName: "wira",
+        email: "nicowraianta@gmail.com",
+        phone: "123132123123",
+        address: "abcabc",
+      },
+      cart: [
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asdfkjksdfj32",
+          productName: "Small gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+      ],
+      cartTotal: "200",
+      discount: "50",
+      discountCode: "hahsdf",
+      totalAmount: "100",
+      paymentInfo: {
+        status: "paid", // pending or paid
+        method: "cash on pickup", //credic card, debit, etc
+        paidAmount: "2302",
+        transactionId: "ja81324jkh",
+        paidDate: "11/11/2022",
+      },
+    },
+    {
+      _id: "3",
+      status: "processing", // processing, complete, cancelled
+      buyer: {
+        buyerId: "23423432", // _id of the user
+        fName: "Nico",
+        lName: "wira",
+        email: "nicowraianta@gmail.com",
+        phone: "123132123123",
+        address: "abcabc",
+      },
+      cart: [
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asdfkjksdfj32",
+          productName: "Small gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+      ],
+      cartTotal: "200",
+      discount: "50",
+      discountCode: "hahsdf",
+      totalAmount: "100",
+      paymentInfo: {
+        status: "paid", // pending or paid
+        method: "cash on pickup", //credic card, debit, etc
+        paidAmount: "2302",
+        transactionId: "ja81324jkh",
+        paidDate: "11/11/2022",
+      },
+    },
+    {
+      _id: "4",
+      status: "shipped", // processing, complete, cancelled
+      buyer: {
+        buyerId: "23423432", // _id of the user
+        fName: "Nico",
+        lName: "wira",
+        email: "nicowraianta@gmail.com",
+        phone: "123132123123",
+      },
+      cart: [
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asdfkjksdfj32",
+          productName: "Small gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+      ],
+      cartTotal: "200",
+      discount: "50",
+      discountCode: "hahsdf",
+      totalAmount: "100",
+      paymentInfo: {
+        status: "paid", // pending or paid
+        method: "cash on pickup", //credic card, debit, etc
+        paidAmount: "2302",
+        transactionId: "ja81324jkh",
+        paidDate: "11/11/2022",
+      },
+    },
+    {
+      _id: "5",
+      status: "cancelled", // processing, complete, cancelled
+      buyer: {
+        buyerId: "23423432", // _id of the user
+        fName: "Nico",
+        lName: "wira",
+        email: "nicowraianta@gmail.com",
+        phone: "123132123123",
+      },
+      cart: [
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asdfkjksdfj32",
+          productName: "Small gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
+        },
+        {
+          productId: "asd92341kd",
+          productName: "Nerf Gun",
+          salePrice: "50",
+          qty: 4,
+          thumbnail: "http://",
+          subTotal: 200,
         },
       ],
       cartTotal: "200",

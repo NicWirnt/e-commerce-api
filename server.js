@@ -35,6 +35,7 @@ import orderRouter from "./src/routers/orderRouter.js";
 
 app.use("/api/v1/admin", adminRouter);
 app.use("/api/v1/category", adminAuth, categoryRouter);
+app.use("/api/v1/client/category", categoryRouter);
 app.use("/api/v1/products", adminAuth, productRouter);
 app.use("/api/v1/payment-method", adminAuth, paymentMethodRouter);
 app.use("/api/v1/customers", adminAuth, customerRouter);
