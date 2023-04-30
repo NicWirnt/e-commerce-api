@@ -4,8 +4,9 @@ export const dbConnect = () => {
   try {
     const conn = mongoose.connect(process.env.MONGO_CLIENT);
 
-    conn && console.log("mongoDb connected");
+    console.log("mongoDb connected");
+    return conn;
   } catch (error) {
-    console.log(error);
+    console.log("Error connecting to MongoDb", error);
   }
 };

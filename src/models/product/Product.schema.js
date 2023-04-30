@@ -74,6 +74,10 @@ const ProductSchema = new mongoose.Schema(
       max: 5,
       default: 5,
     },
+    cartQty: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,

@@ -24,8 +24,8 @@ POST  http://localhost:8000/api/v1/admin/email-verification
 Content-Type: application/json
 
 {
-    "email" : "a@admin.com",
-   "emailValidationCode" : "95244771-cf94-4893-836d-29070b554d71"
+    "email" : "nicowiranata@gmail.com",
+   "emailValidationCode" : "b8b74806-9885-42cf-82c6-97932c582a30"
 }
 
 ### LOGIN API
@@ -58,13 +58,8 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJp
 ### Create new Category
 POST http://localhost:8000/api/v1/category/
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE2NjY1ODM4NDMsImV4cCI6MTY2NjU4MzkwM30.rZpxm98MdR_WE1S0Vr4AVhbIME1II6fo6yNhDtABOmI
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pY293aXJhbmF0YUBnbWFpbC5jb20iLCJpYXQiOjE2ODI2NDE3NTUsImV4cCI6MTY4MjY0MjY1NX0.UMexICUEcrnKYUOyzkO17u5CnfFEsRhm61GM05ivXLg
 
-{
-    "status" : "inactive",
-    
-    "catName" : "R/C Plane"
-}
 
 ###get all active categories
 GET  http://localhost:8000/api/v1/category/

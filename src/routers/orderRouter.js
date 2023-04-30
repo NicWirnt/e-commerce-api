@@ -23,4 +23,13 @@ router.get("/:_id?", (req, res, next) => {
   }
 });
 
+router.post("/", (req, res, next) => {
+  try {
+    const data = req.body;
+  } catch (error) {
+    error.status = 400;
+    next(error);
+  }
+});
+
 export default router;
