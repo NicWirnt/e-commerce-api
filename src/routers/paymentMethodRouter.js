@@ -5,7 +5,7 @@ import {
   getPaymentMethods,
   insertPaymentMethod,
   updatePaymentMethodById,
-} from "../models/payment-methods/paymentMethod.model.js";
+} from "../models/payment-methods/PaymentMethod.model.js";
 
 const router = express.Router();
 
