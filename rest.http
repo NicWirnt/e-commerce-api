@@ -4,6 +4,7 @@ GET http://localhost:8000/
 ###### admin API ######
 ### GET ADMIN API
 GET http://localhost:8000/api/v1/admin
+Content-Type: application/json
 
 ### POST ADMIN API
 POST  http://localhost:8000/api/v1/admin
